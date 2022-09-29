@@ -1,0 +1,51 @@
+
+<!-- <div class="row" *ngIf="(areFormsIds$ | async)"> -->
+<div class="row" >
+  <div class="col-12">
+    <!-- Bienvenid@, {{ (userData$ | async).nombre }} -->
+      <div class="content-header">Bienvenido</div>
+      <p class="mt-2">
+        Aquí tienes un resumen del estilo de aprendizaje total promedio de la institucion.
+      </p>
+  </div>
+</div>
+<!-- <div class="row text-left" *ngIf="(areFormsIds$ | async)"> -->
+<div class="row text-left" >
+
+  <div class="col-sm-12 col-12 col-lg-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Promedio Total: </h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                  <div id="bar-bar1" class="height-400">
+                      <canvas baseChart 
+                              class="chart" 
+                              [datasets]="barChartData" 
+                              [labels]="barChartLabels" 
+                              [options]="barChartOptions" 
+                              [colors]="barChartColors" 
+                              [legend]="barChartLegend"
+                              [chartType]="barChartType" 
+                              (chartHover)="chartHovered($event)" 
+                              (chartClick)="chartClicked($event)">
+                      </canvas>
+                  </div>
+                  <div id="bar-bar1" class="height-400">
+                    <canvas baseChart 
+                            class="chart" 
+                            [datasets]="radarChartData" 
+                            [labels]="radarChartLabels" 
+                            [options]="radarChartOptions" 
+                            [colors]="radarChartColors" 
+                            [chartType]="radarChartType" 
+                            (chartHover)="chartHovered($event)" 
+                            (chartClick)="chartClicked($event)">
+                    </canvas>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

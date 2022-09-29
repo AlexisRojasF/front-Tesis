@@ -1,0 +1,169 @@
+<section class="page-user-profile">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <!-- <div class="user-profile-images">
+         
+          <img src="assets/img/banner/profile-image.jpg" class="img-fluid rounded-top user-timeline-image" alt="User Timeline Image">
+          
+          <img src="assets/img/portrait/small/avatar-s-20.png" class="user-profile-image rounded" alt="User Profile Image" height="140" width="140">
+        </div>
+        <div class="user-profile-text">
+          <h4 class="profile-text-color mb-0">{{ (userData$ | async).nombre }}</h4>
+          <small>{{ (userData$ | async).rol }}</small>
+        </div>
+        
+        <div class="card-content">
+          <div class="card-body">
+            <div class="user-profile-buttons d-flex justify-content-center justify-content-sm-start">
+              <a class="btn btn-primary mr-3" routerLink="/professor/profile">Mi perfil</a>
+            </div>
+          </div>
+          
+        </div>-->
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row profile-info-posts" *ngIf="!(areFormsIds$ | async)">
+  <div class="col-6 col-sm-6 col-lg-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="card-title m-0">Perfil</h4>
+        
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <!-- <p class="m-0">
+            Bienvenido a Learning Styles, {{ (userData$ | async).nombre }}. Esta herramienta te 
+            permitirá mejorar la forma en la que aprendes, primero midiendo tu estilo de aprendizaje,
+            y luego dándote pautas para asimilar el conocimiento de la mejor manera posible. Para comenzar, 
+            te invitamos a llenar tu primer formulario de estilos de aprendizaje. Para ello, dale clic al
+            botón de abajo. 
+          </p>-->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Nombre</span>
+            </div>
+            <input [disabled]="true" type="text" class="form-control" placeholder={{name}} aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Correo</span>
+            </div>
+            <input [disabled]="true" type="text" class="form-control" placeholder={{email}} aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          
+          
+          <div class="user-profile-buttons d-flex justify-content-center justify-content-sm-start">
+            <button class="btn btn-primary mt-3" routerLink="/professor/profile">Editar</button>
+          </div>
+        </div>
+        <!-- user profile body ends -->
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-sm-6 col-lg-6 " routerLink="/professor/grupos" style="max-height: 500px;">
+    <div class="card cursor-pointer"  >
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="card-title m-0">Grupos</h4>
+      <br>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <img src="../../../../assets/img/profe/54950.jpg" class="img-fluid d-block" alt="Responsive image" height="40%" width="40%" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"/>
+          <!-- <p class="m-0">
+            Bienvenido a Learning Styles, {{ (userData$ | async).nombre }}. Esta herramienta te 
+            permitirá mejorar la forma en la que aprendes, primero midiendo tu estilo de aprendizaje,
+            y luego dándote pautas para asimilar el conocimiento de la mejor manera posible. Para comenzar, 
+            te invitamos a llenar tu primer formulario de estilos de aprendizaje. Para ello, dale clic al
+            botón de abajo. 
+          </p>-->
+          <!-- <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Profesor</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Estudiantes</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of lista">
+                <td>
+                        {{item}}
+              </td>
+              </tr>
+            </tbody>
+          </table>-->
+          <div class="user-profile-buttons d-flex justify-content-center justify-content-sm-start">
+            <button class="btn btn-primary mt-3" >Ver</button>
+          </div>
+        </div>
+        <!-- user profile body ends -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row" *ngIf="(areFormsIds$ | async)"> -->
+<div class="row" >
+  <div class="col-12">
+    <!-- Bienvenid@, {{ (userData$ | async).nombre }} -->
+      <div class="content-header">Bienvenido {{name}}</div>
+      <p class="mt-2">
+        Aquí tienes un resumen del estilo de aprendizaje promedio de tu facultad. Para ver tu historial completo, <a routerLink="/professor/estadisticas">haz click aquí</a>.
+      </p>
+  </div>
+</div>
+<!-- <div class="row text-left" *ngIf="(areFormsIds$ | async)"> -->
+<div class="row text-left" >
+  <!-- <div class="col-sm-6">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Radar Chart</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                  <div id="radar-chart1" class="height-400">
+                      <canvas baseChart 
+                              class="chart" 
+                              [datasets]="radarChartData" 
+                              [labels]="radarChartLabels" 
+                              [options]="radarChartOptions" 
+                              [chartType]="radarChartType" 
+                              [colors]="radarChartColors" 
+                              (chartHover)="chartHovered($event)"
+                              (chartClick)="chartClicked($event)">
+                      </canvas>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>-->
+
+  <div class="col-sm-12 col-12 col-lg-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Bar Chart</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                  <div id="bar-bar1" class="height-400">
+                      <canvas baseChart 
+                              class="chart" 
+                              [datasets]="barChartData" 
+                              [labels]="barChartLabels" 
+                              [options]="barChartOptions" 
+                              [colors]="barChartColors" 
+                              [legend]="barChartLegend"
+                              [chartType]="barChartType" 
+                              (chartHover)="chartHovered($event)" 
+                              (chartClick)="chartClicked($event)">
+                      </canvas>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

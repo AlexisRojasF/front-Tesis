@@ -1,0 +1,114 @@
+<form>
+  <div class="form-group"> <!-- Full Name   <div class="form-group mb-4" *ngFor="let q of chaeaQuestions | slice:0:20">-->
+      <label for="full_name_id" class="control-label">Nombre</label>
+      <input [(ngModel)]="facultad.name" type="text" class="form-control" id="full_name_id" name="full_name" placeholder="Nombre">
+  </div>    
+  
+  <div class="form-group"> <!-- Street 1 -->
+      <label for="street1_id" class="control-label">Estado</label>
+      <input [(ngModel)]="facultad.estado" type="text" class="form-control" id="street1_id" name="email" placeholder="true/false">
+  </div>                    
+                          
+  <!--<div class="form-group">
+      <label for="street2_id" class="control-label">Programa</label>
+      <input [(ngModel)]="facultad.programa" type="text" class="form-control" id="street2_id" name="rol" placeholder="Programa">
+  </div>-->                                    
+                          
+  <div class="form-group row"> <!-- Submit Button -->
+      <button (click)="CrudUser()" type="submit" class="btn btn-primary m-4">{{crud}}</button>
+      <div  *ngIf="cancel">
+        <button  (click)="CancelForm()"  type="submit" class="btn btn-danger m-4">cancelar</button>
+      </div>
+      
+  </div>  
+  
+  
+</form>
+<!-- <div class="input-group mb-3">
+<div class="input-group-prepend">
+  <select  class="form-control" id="state_id">
+    <option  value="AL">Admin</option>
+    <option value="AK">Usuario</option>
+    <option value="AZ">Profesor</option>
+    <option value="AR">Grupos</option>
+</select> 
+</div>
+<input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+</div> -->
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Borrar!</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Esta seguro de eliminar este usuario ?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Cancelar</button>
+    <button type="button" class="btn btn btn-danger" (click)="eliminarUsr()">Eliminar</button>
+  </div>
+</ng-template>
+
+<section id="ngx">
+    <table class="table" style="text-align: center;">
+      <thead class="thead-light">
+        <tr class="col-12">
+          <th scope="col" class="col-2">Nombre</th>
+          <th scope="col" class="col-2">Estdo</th>
+          <!--<th scope="col" class="col-2">Programa</th>-->
+          <th scope="col" class="col-4" >Accion</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of Facultad; index as i">
+          <td>
+                {{item.nombre}}
+          </td>
+          <td>{{item.estado}}</td>
+          <!--<td>{{item.programa_id[0]}}</td>-->
+          <td>
+          <button (click)="Print(item)" type="submit" class="btn btn-info m-2">Editar</button>
+          <button (click)="open(content,item._id)" type="submit" class="btn btn btn-danger m-2">Eliminar</button>
+          <button (click)="viewEstadistic(item._id, item.nombre)" type="submit" class="btn btn-primary m-4">%</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a (click)="prevPage()" class="page-link"  aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" >{{page}}</a></li>
+      <li class="page-item">
+        <a class="page-link" (click)="nextPage()" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span  class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="row" *ngIf="test">
+    <label>Faculdad de: {{FacultadName}}</label>
+    <div id="bar-bar1" class="height-400">
+      <canvas baseChart 
+              class="chart" 
+              [datasets]="barChartData" 
+              [labels]="barChartLabels" 
+              [options]="barChartOptions" 
+              [colors]="barChartColors" 
+              [legend]="barChartLegend"
+              [chartType]="barChartType" 
+              (chartHover)="chartHovered($event)" 
+              (chartClick)="chartClicked($event)">
+      </canvas>
+  </div>
+
+  </div>

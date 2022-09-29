@@ -1,0 +1,130 @@
+
+<!-- <div class="row" *ngIf="(areFormsIds$ | async)"> -->
+<div class="row">
+  <div class="col-12" style="text-align: center;">
+    <table class="table">
+      <thead class="thead-light">
+        <tr class="col-12">
+          <th scope="col" class="col-2">Nombre</th>
+          <th scope="col" class="col-4">Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of grupos; index as i">
+          <td>
+            {{ item.nombre }}
+          </td>
+          <td>
+            <button (click)="CharGrupos(item._id, item.nombre)" type="submit" class="btn btn-info m-2">
+              Ver
+            </button>
+            <!--<button (click)="CharGrupos(item._id)" type="submit" class="btn btn btn-danger m-2">Eliminar</button>-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+  <div class="row"  *ngIf="disable">
+    <div class="col-12">
+      <!-- Bienvenid@, {{ (userData$ | async).nombre }} -->
+        <div class="content-header">Bienvenido</div>
+        <p class="mt-2">
+          Aquí tienes un resumen del estilo de aprendizaje total promedio del grupo <b>{{nameGrupo}}</b>
+        </p>
+    </div>
+  </div>
+  <!-- <div class="row text-left" *ngIf="(areFormsIds$ | async)"> -->
+  <div class="row text-left"  *ngIf="disable">
+  
+    <div class="col-sm-12 col-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Promedio Total Grupo {{nameGrupo}}: </h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <div id="bar-bar1" class="height-400">
+                        <canvas baseChart 
+                                class="chart" 
+                                [datasets]="barChartData" 
+                                [labels]="barChartLabels" 
+                                [options]="barChartOptions" 
+                                [colors]="barChartColors" 
+                                [legend]="barChartLegend"
+                                [chartType]="barChartType" 
+                                (chartHover)="chartHovered($event)" 
+                                (chartClick)="chartClicked($event)">
+                        </canvas>
+                    </div>
+                    <div id="bar-bar1" class="height-400">
+                      <canvas baseChart 
+                              class="chart" 
+                              [datasets]="radarChartData" 
+                              [labels]="radarChartLabels" 
+                              [options]="radarChartOptions" 
+                              [colors]="radarChartColors" 
+                              
+                              [chartType]="radarChartType" 
+                              (chartHover)="chartHovered($event)" 
+                              (chartClick)="chartClicked($event)">
+                      </canvas>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" >
+      
+      <div class="col-12 col-sm-12 col-lg-12 " >
+        <table class="table table-bordered table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">Estilo</th>
+              <th scope="col">Muy baja</th>
+              <th scope="col">Baja</th>
+              <th scope="col">Moderada</th>
+              <th scope="col">Alta</th>
+              <th scope="col">Muy alta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Activo</th>
+              <td [ngStyle]="{'background-color': (ActivoT=='Muy baja') ? '#73c7af' : '#ffffff'}">0-6</td>
+              <td [ngStyle]="{'background-color': (ActivoT=='Baja') ? '#73c7af' : '#ffffff'}">7-8</td>
+              <td [ngStyle]="{'background-color': (ActivoT=='Moderada') ? '#73c7af' : '#ffffff'}">9-12</td>
+              <td [ngStyle]="{'background-color': (ActivoT=='Alta') ? '#73c7af' : '#ffffff'}">13-14</td>
+              <td [ngStyle]="{'background-color': (ActivoT=='Muy alta') ? '#73c7af' : '#ffffff'}">15-20</td>
+            </tr>
+            <tr>
+              <th scope="row">Reflexivo</th>
+              <td [ngStyle]="{'background-color': (ReflexivoT=='Muy baja') ? '#73c7af' : '#ffffff'}">0-10</td>
+              <td [ngStyle]="{'background-color': (ReflexivoT=='Baja') ? '#73c7af' : '#ffffff'}">11-13</td>
+              <td [ngStyle]="{'background-color': (ReflexivoT=='Moderada') ? '#73c7af' : '#ffffff'}">14-17</td>
+              <td [ngStyle]="{'background-color': (ReflexivoT=='Alta') ? '#73c7af' : '#ffffff'}">18-19</td>
+              <td [ngStyle]="{'background-color': (ReflexivoT=='Muy alta') ? '#73c7af' : '#ffffff'}">20</td>
+            </tr>
+            <tr>
+              <th scope="row">Teorico</th>
+              <td [ngStyle]="{'background-color': (TeoricoT=='Muy baja') ? '#73c7af' : '#ffffff'}">0-6</td>
+              <td [ngStyle]="{'background-color': (TeoricoT=='Baja') ? '#73c7af' : '#ffffff'}">7-9</td>
+              <td [ngStyle]="{'background-color': (TeoricoT=='Moderada') ? '#73c7af' : '#ffffff'}">10-13</td>
+              <td [ngStyle]="{'background-color': (TeoricoT=='Alta') ? '#73c7af' : '#ffffff'}">14-15</td>
+              <td [ngStyle]="{'background-color': (TeoricoT=='Muy alta') ? '#73c7af' : '#ffffff'}">16-20</td>
+            </tr>
+            <tr>
+              <th scope="row">Pragmatico</th>
+              <td [ngStyle]="{'background-color': (PragmaticoT=='Muy baja') ? '#73c7af' : '#ffffff'}">0-8</td>
+              <td [ngStyle]="{'background-color': (PragmaticoT=='Baja') ? '#73c7af' : '#ffffff'}">9-10</td>
+              <td [ngStyle]="{'background-color': (PragmaticoT=='Moderada') ? '#73c7af' : '#ffffff'}">11-13</td>
+              <td [ngStyle]="{'background-color': (PragmaticoT=='Alta') ? '#73c7af' : '#ffffff'}">14-15</td>
+              <td [ngStyle]="{'background-color': (PragmaticoT=='Muy alta') ? '#73c7af' : '#ffffff'}">16-20</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

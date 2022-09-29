@@ -1,0 +1,102 @@
+<section class="page-user-profile">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row profile-info-posts" *ngIf="!(areFormsIds$ | async)">
+  <div class="col-6 col-sm-6 col-lg-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="card-title m-0">Perfil</h4>
+        
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Nombre</span>
+            </div>
+            <input [disabled]="true" type="text" class="form-control" placeholder={{name}} aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Correo</span>
+            </div>
+            <input [disabled]="true" type="text" class="form-control" placeholder={{email}} aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          
+          
+          <div class="user-profile-buttons d-flex justify-content-center justify-content-sm-start">
+            <button class="btn btn-primary mt-3" routerLink="/student/profile">Editar</button>
+          </div>
+        </div>
+        <!-- user profile body ends -->
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-sm-6 col-lg-6 " style="max-height: 500px;">
+    <div class="card cursor-pointer"  >
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="card-title m-0">Grupos</h4>
+      <br>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <table class="table mb-4">
+            <thead class="thead-light">
+              <tr class="col-12">
+                <th scope="col" class="col-6 text-center">Nombre</th>
+                <th scope="col" class="col-6 text-center">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of GruposEstudiante; index as i">
+                <td class="text-center">
+                  {{ item.nombre }}
+                </td>
+                <td class="text-center">
+                  <div *ngIf="item.estado; else desactivado">Activo</div>
+                  <ng-template #desactivado>
+                    <div>Desactivado</div>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- user profile body ends -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row" *ngIf="(areFormsIds$ | async)"> -->
+<div class="row" >
+  <div class="col-12">
+    <!-- Bienvenid@, {{ (userData$ | async).nombre }} -->
+      <div class="content-header">Bienvenido {{name}}</div>
+      <p class="mt-2">
+        Aquí en esta sección se puede enviar la solicitud al grupo que desea aplicar, para esto necesite el ID del grupo.
+      </p>
+  </div>
+</div>
+<!-- <div class="row text-left" *ngIf="(areFormsIds$ | async)"> -->
+<div class="row text-left card" >
+  <form [formGroup]="registerForm">
+    <div class="form-group card-header">
+      <label for="nombre" class="form-label">Id del grupo</label>
+      <input type="text" formControlName="nombre" class="form-control mt-1 mb-2" placeholder="Id" />
+      <div *ngIf="registerForm.get('nombre').errors" class="help-block mt-1 text-danger">
+        <i class="ft-alert-circle align-middle"></i> Se requiere el Id del grupo que desea aplicar
+      </div>
+    </div>
+    <div class="card-body">
+      <button type="submit" (click)="EnvioForm()" class="btn btn-primary my-2">
+        Enviar Solicitud
+      </button>
+    </div>
+  </form>
+</div>

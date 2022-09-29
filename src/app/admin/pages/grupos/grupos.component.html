@@ -1,0 +1,191 @@
+<div class="container">
+  <h1 class="py-3 col-6">Grupos</h1>
+  <form [formGroup]="registerForm">
+    <div class="form-group">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" formControlName="nombre" class="form-control mt-1 mb-2" placeholder="Nombre" />
+      <div *ngIf="registerForm.get('nombre').errors" class="help-block mt-1 text-danger">
+        <i class="ft-alert-circle align-middle"></i> Se requiere el nombre
+      </div>
+    </div>
+    <label for="nombre" class="form-label">Facultad</label>
+    <div class="form-group"> <!-- Street 1 -->
+      <div class="row">
+        <div class="col">
+          <div ngbDropdown class="d-inline-block">
+            <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{selectF}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1"  >
+              <button ngbDropdownItem *ngFor="let item of facultades; index as i" (click)="selectFacultad(item.nombre,item._id)">{{item.nombre}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div *ngIf="!cancel">
+      <button type="submit" (click)="EnvioForm()" class="btn btn-primary my-2">
+        {{ crud }}
+      </button>
+    </div>
+    <div *ngIf="cancel">
+      <button (click)="Cancelar()" type="submit" class="btn btn-danger my-2">
+        cancelar
+      </button>
+    </div>
+  </form>
+
+    <h1 class="py-3 col-6">Estudiantes</h1>
+    <div class="form-group"> <!-- Street 1 -->
+      <label for="street1_id" class="control-label">id del grupo</label>
+      <input [(ngModel)]="groupId" type="text" class="form-control" id="street1_id" name="email" placeholder="id grupo">
+    </div>  
+    <div class="form-group"> <!-- Street 1 -->
+      <label for="street1_id" class="control-label">id del estudiante</label>
+      <input [(ngModel)]="studentId" type="text" class="form-control" id="street1_id" name="email" placeholder="id estudiante">
+    </div>  
+    <button (click)="AddStudent()" type="submit" class="btn btn-primary my-2">
+        Agregar
+    </button>
+
+  
+  <h4 class="mt-4 text-center">Grupos</h4>
+  <table class="table mb-4">
+    <thead class="thead-light">
+      <tr class="col-12">
+        <th scope="col" class="col-6 text-center">id</th>
+        <th scope="col" class="col-6 text-center">Nombre</th>
+        <th scope="col" class="col-3 text-center">Estado</th>
+        <th scope="col" class="col-3 text-center">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of grupos; index as i">
+        <td class="text-center">
+          {{ item._id }}
+        </td>
+        <td class="text-center">
+          {{ item.nombre }}
+        </td>
+        <td class="text-center">
+          <div *ngIf="item.estado; else desactivado">Activo</div>
+          <ng-template #desactivado>
+            <div>Desactivado</div>
+          </ng-template>
+        </td>
+        <td class="text-center">
+          <button (click)="Print(item)" type="submit" class="btn btn-info m-2">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <div class="col-12 col-lg-6 mt-4">
+      <h4 class="text-center">Solicitudes</h4>
+      <table class="table">
+        <thead class="thead-light">
+          <tr class="col-6">
+            <th scope="col" class="text-center">Nombre</th>
+            <th scope="col" class="text-center">Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ListadoGrupoS; index as i">
+            <td class="text-center">
+              {{ item.nombre }}
+            </td>
+            <td class="text-center">
+              <button type="button" (click)="AgregarEstudiante(item)" class="btn btn-primary m-2">
+                Aceptar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  <div class="row">
+    
+
+    <div class="col-12 col-lg-6 mt-4">
+      <h4 class="text-center">Estudiantes</h4>
+      <table class="table">
+        <thead class="thead-light">
+          <tr class="col-6">
+            <th scope="col" class="text-center">id</th>
+            <th scope="col" class="text-center">Nombre</th>
+            <th scope="col" class="text-center">Genero</th>
+            <th scope="col" class="text-center">Correo</th>
+            <th scope="col" class="text-center">Test</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ListadoGrupo; index as i">
+            <td class="text-center">
+              {{ item.estudiante }}
+            </td>
+            <td class="text-center">
+              {{ item.nombre }}
+            </td>
+            <td class="text-center">
+              {{ item.genero }}
+            </td>
+            <td class="text-center">
+              {{ item.email }}
+            </td>
+            <td class="text-center">
+              <button (click)="habilitarTest(item._id)" type="submit" class="btn btn-info m-2">
+                %
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+  <div class="row" *ngIf="test">
+
+    <table class="table" >
+      <thead class="thead-light">
+        <tr class="col-12">
+          <th scope="col" class="col-2">activo</th>
+          <th scope="col" class="col-2">pragmatico</th>
+          <th scope="col" class="col-4">reflexivo</th>
+          <th scope="col" class="col-4">teorico</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> {{ result.activo }}</td>
+          <td>{{ result.reflexivo }}</td>
+          <td>{{ result.pragmatico }}</td>
+          <td>{{ result.teorico }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="row" *ngIf="test">
+
+    <div id="bar-bar1" class="height-400">
+      <canvas baseChart 
+              class="chart" 
+              [datasets]="barChartData" 
+              [labels]="barChartLabels" 
+              [options]="barChartOptions" 
+              [colors]="barChartColors" 
+              [legend]="barChartLegend"
+              [chartType]="barChartType" 
+              (chartHover)="chartHovered($event)" 
+              (chartClick)="chartClicked($event)">
+      </canvas>
+  </div>
+
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<!--Login Page Starts-->
+<section id="login">
+    <div class="row auth-height full-height-vh m-0">
+      <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="card overflow-hidden">
+          <div class="card-content">
+            <div class="card-body auth-img">
+              <div class="row m-0">
+                <div class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center auth-img-bg p-3">
+                  <img src="assets/img/gallery/login.png" alt="" class="img-fluid" width="300" height="230">
+                </div>
+                <div class="col-lg-6 col-12 px-4 py-3">
+                  <h4 class="mb-2 card-title">¿Que Eres?</h4>
+                  <p>Para una mejor inmersión de la plataforma escoge que rol desempeñas en la aplicación.</p>
+                  <form [formGroup]="rolForm">
+                   <div class="row m-0">
+                      <label for="inputEmail3" class="col-sm-3 col-form-label"
+                        >Rol:
+                      </label>
+                      <div class="col-sm-9">
+                        <select
+                          class="form-control form-select-sm"
+                          aria-label=".form-select-sm example"
+                          formControlName="rol"
+                          id="floatingSelectGrid"
+                        >
+                          <option value="ESTUDIANTE_ROLE">Estudiante</option>
+                          <option value="PROFESOR_ROLE">Profesor</option>
+                        </select>
+                      </div>
+                    </div>
+                    <br>
+           
+                    
+              
+                    <div class="d-flex justify-content-between flex-sm-row flex-column">
+                      <a  class="btn bg-light-primary mb-2 mb-sm-0" (click)="onSubmit()">Aceptar</a>
+                    </div>
+                  </form>
+                  <hr>
+ 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!--Login Page Ends-->
+  

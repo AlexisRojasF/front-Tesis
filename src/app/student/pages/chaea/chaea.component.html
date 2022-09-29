@@ -1,0 +1,209 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="content-header">Formulario de estilos de aprendizaje CHAEA</div>
+    </div>
+</div>
+<section id="ngx">
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Formulario filanizado!!</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          <p>Formulario completado con exito!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success" (click)="d('Cross click')" routerLink="/student/dashboard" >ok!</button>
+        </div>
+      </ng-template>
+<div class="card">
+    <div class="card-content">
+        <div class="card-body">
+            <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
+                <aw-wizard-step [stepTitle]="'Paso 1'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                    <form #stepOneForm="ngForm" class="editForm">
+                        <h4 class="head text-center mt-4 mb-2">Por favor, contesta la siguientes preguntas:</h4>
+                        <br/>
+                        <div class='row'>
+                            <div class='col-12'>
+                                <div class="row">
+                                    <div class='col-12'>
+                                        <div class="form-group mb-4" *ngFor="let q of chaeaQuestions | slice:0:20">
+                                            <label class="form-control-label mb-2">
+                                                {{ (q.id | parseToInt) + 1 }}. {{ q.statement }}
+                                            </label>
+                                            <div class="list-unstyled mb-0">
+                                                <li class="d-inline-block mr-2">
+                                                    <div class="radio">
+                                                        <input  type="radio"
+                                                                name="basic-radio-{{ q.id }}"
+                                                                [id]="q.id | radioId"
+                                                                (change)="computeSingleQuestionResult('add', q.id)"
+                                                                required>
+                                                        <label [for]="q.id | radioId">Sí</label>
+                                                    </div>
+                                                </li>
+                                                <li class="d-inline-block mr-2">
+                                                    <div class="radio">
+                                                        <input  type="radio"
+                                                                name="basic-radio-{{ q.id }}"
+                                                                [id]="q.id | radioId:'negative'"
+                                                                (change)="computeSingleQuestionResult('remove', q.id)"
+                                                                required>
+                                                        <label [for]="q.id | radioId:'negative'">No</label>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="button" uiSref="work" class="btn btn-info" [disabled]="!stepOneForm.valid" awNextStep>
+                                                Siguiente
+                                                <span style="margin-left:10px;">
+                                                    <i class="ft-chevron-right"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </aw-wizard-step>
+                <aw-wizard-step  [stepTitle]="'Paso 2'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+                    <form #stepTwoForm="ngForm" class="editForm">
+                        <h4 class="head text-center mt-4 mb-2">Por favor, contesta la siguientes preguntas:</h4>
+                        <br/>
+                        <div class='row'>
+                            <div class='col-12'>
+                                <div class="row">
+                                    <div class='col-12'>
+                                        <div class="form-group mb-4" *ngFor="let q of chaeaQuestions | slice:20:40">
+                                            <label class="form-control-label mb-2"> {{ (q.id | parseToInt) + 1 }}. {{ q.statement }} </label>
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="d-inline-block mr-2">
+                                                    <div class="radio">
+                                                        <input type="radio" name="basic-radio-{{ q.id }}" [id]="q.id | radioId" (change)="computeSingleQuestionResult('add', q.id)">
+                                                        <label [for]="q.id | radioId">Sí</label>
+                                                    </div>
+                                                </li>
+                                                <li class="d-inline-block mr-2">
+                                                    <div class="radio">
+                                                        <input type="radio" name="basic-radio-{{ q.id }}" [id]="q.id | radioId:'negative'" (change)="computeSingleQuestionResult('remove', q.id)">
+                                                        <label [for]="q.id | radioId:'negative'">No</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group text-center space-20">
+                                            <button uiSref="personal" type="button" class="btn btn-secondary mr-1" awPreviousStep>
+                                                <span style="margin-right:10px;">
+                                                    <i class="ft-chevron-left"></i>
+                                                </span>Anterior</button>
+                                            <button uiSref="address" type="button" class="btn btn-info" [disabled]="!stepTwoForm.valid" awNextStep>
+                                                Siguiente
+                                                <span style="margin-left:10px;">
+                                                    <i class="ft-chevron-right"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </aw-wizard-step>
+                <aw-wizard-step [stepTitle]="'Paso 3'" [navigationSymbol]="{ symbol: '&#xf0ac;', fontFamily: 'FontAwesome' }">
+                    <form #stepThreeForm="ngForm" class="editForm">
+                        <h4 class="head text-center mt-4 mb-2">Por favor, contesta la siguientes preguntas:</h4>
+                        <br/>
+                        <div class='row'>
+                            <div class='col-12'>
+                                <div class="row">
+                                    <div class='col-12'>
+                                        <div class="form-group mb-4" *ngFor="let q of chaeaQuestions | slice:40:60">
+                                            <label class="form-control-label mb-2"> {{ (q.id | parseToInt) + 1 }}. {{ q.statement }} </label>
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="d-inline-block mr-2">
+                                                    <div class="radio">
+                                                        <input type="radio" name="basic-radio-{{ q.id }}" [id]="q.id | radioId" (change)="computeSingleQuestionResult('add', q.id)">
+                                                        <label [for]="q.id | radioId">Sí</label>
+                                                    </div>
+                                                </li>
+                                                <li class="d-inline-block mr-2">
+                                                    <div class="radio">
+                                                        <input type="radio" name="basic-radio-{{ q.id }}" [id]="q.id | radioId:'negative'" (change)="computeSingleQuestionResult('remove', q.id)">
+                                                        <label [for]="q.id | radioId:'negative'">No</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group text-center space-20">
+                                            <button uiSref="personal" type="button" class="btn btn-secondary mr-1" awPreviousStep>
+                                                <span style="margin-right:10px;">
+                                                    <i class="ft-chevron-left"></i>
+                                                </span>Anterior</button>
+                                            <button uiSref="address" type="button" class="btn btn-info" [disabled]="!stepThreeForm.valid" awNextStep>
+                                                Siguiente
+                                                <span style="margin-left:10px;">
+                                                    <i class="ft-chevron-right"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </aw-wizard-step>
+                <aw-wizard-step [stepTitle]="'Paso 4'" [navigationSymbol]="{ symbol: '&#xf0ac;', fontFamily: 'FontAwesome' }">
+                    <form #stepFourForm="ngForm" class="editForm">
+                        <h4 class="head text-center mt-4 mb-2">Por favor, contesta la siguientes preguntas:</h4>
+                        <br/>
+                        <div class='row'>
+                            <div class='col-12'>
+                                <div class="row">
+                                    <div class='col-12'>
+                                        <div class="form-group mb-4" *ngFor="let q of chaeaQuestions | slice:60:80; let i = index;">
+                                            <label class="form-control-label mb-2"> {{ (q.id | parseToInt) + 1 }}. {{ q.statement }} </label>
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="d-inline-block mr-2">
+                                                    <div class="radio">
+                                                        <input type="radio" name="basic-radio-{{ q.id }}" [id]="q.id | radioId" (change)="computeSingleQuestionResult('add', q.id)">
+                                                        <label [for]="q.id | radioId">Sí</label>
+                                                    </div>
+                                                </li>
+                                                <li class="d-inline-block mr-2">
+                                                    <div class="radio">
+                                                        <input type="radio" name="basic-radio-{{ q.id }}" [id]="q.id | radioId:'negative'" (change)="computeSingleQuestionResult('remove', q.id)">
+                                                        <label [for]="q.id | radioId:'negative'">No</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button uiSref="work" type="button" class="btn btn-secondary mr-1" awPreviousStep>
+                                                <span style="margin-right:10px;">
+                                                    <i class="ft-chevron-left"></i>
+                                                </span>Anterior</button>
+                                            <button uiSref="result" 
+                                                    type="button"
+                                                    class="btn btn-success" 
+                                                    [disabled]="!stepFourForm.valid" 
+                                                    (click)="sendForm(content)">
+                                                Finalizar
+                                                <span style="margin-left:10px;">
+                                                    <i class="ft-chevron-right"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </aw-wizard-step>
+            </aw-wizard>
+        </div>
+    </div>
+</div>
+</section>
